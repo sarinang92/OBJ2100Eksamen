@@ -1,7 +1,16 @@
 package kino;
 
+import kino.view.MainProgramView;
+import kino.repository.LoginRepo;
+
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Hello, World!");
+        // ✅ One-time hashing of any plain-text PINs
+        LoginRepo repo = new LoginRepo();
+        repo.hashAllPlaintextPins();
+
+        // ✅ Start main menu
+        MainProgramView mainView = new MainProgramView();
+        mainView.start();
     }
 }

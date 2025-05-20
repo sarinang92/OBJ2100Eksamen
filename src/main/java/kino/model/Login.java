@@ -2,24 +2,29 @@ package kino.model;
 
 public class Login {
 
-    private String brukernavn;
-    private int pinkode;
-    private boolean erPlanlegger;
+    private final String brukernavn;
+    private final String role;
+    private String pinkode;
+
+    // Constructor
+    public Login(String brukernavn, String role) {
+        this.brukernavn = brukernavn;
+        this.role = role;
+    }
 
     public String getBrukernavn() {
         return brukernavn;
     }
 
-    public int getPinkode() {
+    public String getRole() {
+        return role;
+    }
+
+    public String getPinkode() {
         return pinkode;
     }
 
-    public void setPinkode(int pinkode) {
+    public void setPinkode(String pinkode) {
         this.pinkode = pinkode;
     }
-
-    public boolean isErPlanlegger() {
-        return erPlanlegger;
-    }
-
 }
