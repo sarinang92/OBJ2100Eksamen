@@ -5,11 +5,11 @@ import kino.repository.LoginRepo;
 
 public class Main {
     public static void main(String[] args) {
-        // ✅ One-time hashing of any plain-text PINs
+        // Hashing av alle passord
         LoginRepo repo = new LoginRepo();
         repo.hashAllPlaintextPins();
 
-        // ✅ Start main menu
+        // Starter hovedmeny
         MainProgramView mainView = new MainProgramView();
         mainView.start();
     }
