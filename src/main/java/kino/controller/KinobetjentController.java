@@ -1,7 +1,7 @@
-package controller;
+package kino.controller;
 
-import dao.BillettDAO;
-import model.Billett;
+import kino.dao.BillettDAO;
+import kino.model.Billett;
 
 /**
  * Controller-klasse som håndterer logikken mellom brukergrensesnitt og datatilgang.

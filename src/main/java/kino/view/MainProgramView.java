@@ -1,5 +1,11 @@
 package kino.view;
 
+import kino.config.KinoDatabaseKobling;
+import kino.dao.BillettDAO;
+import kino.controller.KinobetjentController;
+import kino.view.KinobetjentView;
+import java.sql.Connection;
+
 import kino.controller.KundeController;
 import kino.repository.LoginRepo;
 import kino.model.Login;
@@ -44,8 +50,24 @@ public class MainProgramView {
 
     private void betjentMeny() {
         System.out.println("Starter kinobetjentmodul...");
-        // TODO
+
+        try {
+            // 1. Lag databaseforbindelse via din koblingsklasse
+            Connection conn = kino.config.KinoDatabaseKobling.getInstance().getForbindelse();
+
+            // 2. Opprett DAO, Controller og View
+            kino.dao.BillettDAO billettDAO = new kino.dao.BillettDAO(conn);
+            kino.controller.KinobetjentController controller = new kino.controller.KinobetjentController(billettDAO);
+            kino.view.KinobetjentView kinobetjentView = new kino.view.KinobetjentView(controller);
+
+            // 3. Kjør menyen
+            kinobetjentView.visMeny();
+
+        } catch (Exception e) {
+            System.out.println("Feil ved oppstart av kinobetjentmodulen: " + e.getMessage());
+        }
     }
+
 
     private void planleggerMeny() {
         System.out.println("Starter planleggermodul...");

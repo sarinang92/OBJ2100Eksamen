@@ -1,6 +1,6 @@
-package view;
+package kino.view;
 
-import controller.KinobetjentController;
+import kino.controller.KinobetjentController;
 import java.util.Scanner;
 
 /**
