@@ -9,6 +9,7 @@ import java.util.*;
 
 public class KundeService {
 
+    // Repositorier for å kommunisere med databasen
     private final VisningRepo visningRepo = new VisningRepo();
     private final FilmRepo filmRepo = new FilmRepo();
     private final BillettRepo billettRepo = new BillettRepo();
@@ -17,17 +18,18 @@ public class KundeService {
     private Visning valgtVisning;
     private List<Plass> valgtePlasser = new ArrayList<>();
 
+    //Sorteringsalternativer for visninger
     public enum Sortering { FILMNAVN, STARTTID }
 
-
+//Henter alle gyldige visninger som starter om mer enn 30 minutter
     public List<Visning> hentTilgjengeligeVisninger(Sortering sortering) {
         List<Visning> visninger = visningRepo.hentAlleVisninger();
         LocalDateTime nå = LocalDateTime.now();
-
+//Filtrer bort visninger som starter om mindre enn 30 min
         List<Visning> gyldige = visninger.stream()
                 .filter(v -> LocalDateTime.of(v.getDato(), v.getStarttid()).isAfter(nå.plusMinutes(30)))
                 .toList();
-
+        //sortere visninger
         if (sortering == Sortering.FILMNAVN) {
             gyldige = gyldige.stream()
                     .sorted(Comparator.comparing(v -> filmRepo.hentFilm(v.getFilmnr()).getFilmnavn()))
@@ -45,11 +47,12 @@ public class KundeService {
         this.valgtVisning = v;
         this.valgtePlasser.clear();
     }
-
+    //Henter alle ledige plasser for den valgte visningen.
     public List<Plass> hentLedigePlasser() {
         return visningRepo.hentLedigePlasser(valgtVisning.getVisningnr(), valgtVisning.getKinosalnr());
     }
 
+    //Legger til eller fjerner en plass fra listen over valgte plasser.
     public void togglePlass(Plass plass) {
         if (valgtePlasser.contains(plass)) {
             valgtePlasser.remove(plass);
@@ -57,7 +60,7 @@ public class KundeService {
             valgtePlasser.add(plass);
         }
     }
-
+//Skriver ut en bekreftelsesside
     public void visBekreftelse() {
         System.out.println("----- BEKREFTELSE -----");
         Film film = filmRepo.hentFilm(valgtVisning.getFilmnr());
@@ -70,6 +73,7 @@ public class KundeService {
         System.out.println("[1] Bekreft   [2] Avbryt");
     }
 
+    //Regner ut totalpris
     public double getTotalPris() {
         return valgtVisning.getPris() * valgtePlasser.size();
     }
@@ -81,8 +85,9 @@ public class KundeService {
         billett.setVisningsnr(valgtVisning.getVisningnr());
         billett.setErBetalt(false);
 
+        // Opprett billett
         if (!billettRepo.opprettBillett(billett)) return false;
-
+// Knytt plasser til billetten
         for (Plass p : valgtePlasser) {
             PlassBillett pb = new PlassBillett();
             pb.setBillettkode(kode);
@@ -96,12 +101,13 @@ public class KundeService {
         System.out.println("✅ Bestilling bekreftet!");
         return true;
     }
-
+    //Avbryter bestillingen
     public void avbryt() {
         tilbakestill();
         System.out.println("❌ Bestilling avbrutt.");
     }
 
+    //Genererer en unik billettkode.
     private String genererBillettkode() {
         return UUID.randomUUID().toString().substring(0, 6).toUpperCase();
     }
