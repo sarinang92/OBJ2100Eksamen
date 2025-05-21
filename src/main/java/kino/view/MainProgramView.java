@@ -1,5 +1,9 @@
 package kino.view;
 
+import kino.controller.KundeController;
+import kino.repository.LoginRepo;
+import kino.model.Login;
+
 import java.util.Scanner;
 
 public class MainProgramView {
@@ -33,18 +37,19 @@ public class MainProgramView {
     }
 
     private void kundeMeny() {
-        System.out.println("Starter kundemodul...");
-        // TODO: Kall kunde-controller eller vis kunde-meny
+        System.out.println("Starter kundemodul...\n");
+        KundeController kundeController = new KundeController();
+        kundeController.start();  // Kjør kundeflyt
     }
 
     private void betjentMeny() {
         System.out.println("Starter kinobetjentmodul...");
-        // TODO: Kall betjent-controller eller vis betjent-meny
+        // TODO
     }
 
     private void planleggerMeny() {
         System.out.println("Starter planleggermodul...");
-        // TODO: Kall planlegger-controller eller vis planlegger-meny
+        // TODO
     }
 
     private void systemadministrasjon() {
@@ -56,8 +61,8 @@ public class MainProgramView {
         System.out.print("PIN-kode: ");
         String pinkode = scanner.nextLine();
 
-        kino.repository.LoginRepo repo = new kino.repository.LoginRepo();
-        kino.model.Login login = repo.finnEnLogin(brukernavn);
+        LoginRepo repo = new LoginRepo();
+        Login login = repo.finnEnLogin(brukernavn);
 
         if (login == null) {
             System.out.println("Bruker ikke funnet.");
@@ -75,11 +80,8 @@ public class MainProgramView {
             return;
         }
 
-        // brukernavn og passord er godkjent,vis meny
         System.out.println("Innlogging godkjent. Velkommen, admin.");
         BrukeradministrasjonView view = new BrukeradministrasjonView();
         view.visMeny();
     }
-
-
 }

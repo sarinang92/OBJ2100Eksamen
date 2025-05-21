@@ -1,4 +1,4 @@
-package kunde.model;
+package kino.model;
 
 public class Film {
     private int filmnr;
@@ -17,7 +17,7 @@ public class Film {
         return filmnavn;
     }
 
-    @Override
+
     public String toString() {
         return filmnr + ": " + filmnavn;
     }
