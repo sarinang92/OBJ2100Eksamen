@@ -19,6 +19,7 @@ public class KundeService {
 
     public enum Sortering { FILMNAVN, STARTTID }
 
+
     public List<Visning> hentTilgjengeligeVisninger(Sortering sortering) {
         List<Visning> visninger = visningRepo.hentAlleVisninger();
         LocalDateTime nå = LocalDateTime.now();
