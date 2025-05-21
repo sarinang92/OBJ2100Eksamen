@@ -4,10 +4,12 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+// Singleton klasse som håndterer koblingen til databasen
 public class KinoDatabaseKobling {
     private static volatile KinoDatabaseKobling instance;
     private Connection forbindelse;
 
+    // Database-URL, brukernavn og passord
     private static final String url = "jdbc:postgresql://localhost:5432/kino";
     private static final String brukernavn = "Case";
     private static final String passord = "Esac";
@@ -16,6 +18,7 @@ public class KinoDatabaseKobling {
         connect();
     }
 
+// Etablerer en ny tilkobling til databasen
     private void connect() {
         try {
             this.forbindelse = DriverManager.getConnection(url, brukernavn, passord);
@@ -24,7 +27,7 @@ public class KinoDatabaseKobling {
             throw new RuntimeException("Kunne ikke koble til kino-databasen");
         }
     }
-
+ //Returnerer singleton instansen av DatabaseKobling
     public static KinoDatabaseKobling getInstance() {
         KinoDatabaseKobling resultat = instance;
         if (resultat == null) {
@@ -38,6 +41,7 @@ public class KinoDatabaseKobling {
         return resultat;
     }
 
+    //Returnerer en aktiv databaseforbindelse
     public Connection getForbindelse() {
         try {
             if (forbindelse == null || forbindelse.isClosed()) {
