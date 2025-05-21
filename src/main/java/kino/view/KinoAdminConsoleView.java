@@ -1,9 +1,7 @@
-// src/main/java/com/kinoapp/view/KinoAdminConsoleView.java
 package kino.view;
 
 // Importerer nødvendige klasser for å håndtere brukerinput, dato/tid, og kontrollerlogikk.
 import kino.controller.AdminController;
-import kino.controller.TicketController;
 import kino.controller.ReportController; // Importerer den nye ReportControlleren for rapportfunksjonalitet.
 import kino.model.Film; // Modellen for filmer, brukes til dataoverføring.
 import java.time.LocalDate; // For å håndtere datoer.
@@ -18,14 +16,12 @@ public class KinoAdminConsoleView {
 
     private Scanner scanner; // Objekt for å lese brukerinput.
     private AdminController adminController; // Kontroller for administrative oppgaver (filmer, visninger).
-    private TicketController ticketController; // Kontroller for billettrelaterte oppgaver (f.eks. slette ubetalte bestillinger).
     private ReportController reportController; // Instans av ReportController for statistikkgenerering.
 
     // Konstruktør for KinoAdminConsoleView. Initialiserer Scanner og alle kontrollere.
     public KinoAdminConsoleView(Scanner scanner) {
         this.scanner = scanner;
         this.adminController = new AdminController(); // Oppretter en ny AdminController.
-        this.ticketController = new TicketController(); // Oppretter en ny TicketController.
         this.reportController = new ReportController(); // Initialiserer ReportController.
     }
 
@@ -62,9 +58,6 @@ public class KinoAdminConsoleView {
                 case 8:
                     generateCinemaHallStatistics(); // Kall for å generere kinosalstatistikk.
                     break;
-                case 9:
-                    deleteUnpaidBookingsForShowing(); // Kall for å slette ubetalte bestillinger for en visning.
-                    break;
                 case 0:
                     System.out.println("Avslutter administratorkonsoll."); // Melding ved avslutning.
                     return; // Avslutter start-metoden og dermed programmet.
@@ -87,7 +80,6 @@ public class KinoAdminConsoleView {
         System.out.println("6. Slett visning");
         System.out.println("7. Generer filmstatistikk");
         System.out.println("8. Generer salgsstatistikk for kinosal");
-        System.out.println("9. Slett ubetalte bestillinger for visning");
         System.out.println("0. Avslutt");
         System.out.print("Skriv inn ditt valg: "); // Ber brukeren om å velge et alternativ.
     }
@@ -182,15 +174,6 @@ public class KinoAdminConsoleView {
         int cinemaHallId = getValidIntegerInput(); // Leser kinosal-ID for statistikk.
         scanner.nextLine(); // Leser opp det gjenstående linjeskiftet etter tallinput.
         reportController.generateCinemaHallStatistics(cinemaHallId); // Kaller ReportController for å generere kinosalstatistikk.
-    }
-
-    // deleteUnpaidBookingsForShowing()-metoden sletter ubetalte bestillinger for en spesifikk visning.
-    private void deleteUnpaidBookingsForShowing() {
-        System.out.println("\n--- Slett ubetalte bestillinger ---");
-        System.out.print("Skriv inn Visnings ID for å slette ubetalte bestillinger: ");
-        int showingId = getValidIntegerInput(); // Leser visnings-ID.
-        scanner.nextLine(); // Leser opp det gjenstående linjeskiftet etter tallinput.
-        ticketController.deleteUnpaidBookingsForShowing(showingId); // Kaller TicketController for å slette bestillingene.
     }
 
     // getValidIntegerInput()-metoden sikrer at brukeren skriver inn et gyldig positivt heltall.

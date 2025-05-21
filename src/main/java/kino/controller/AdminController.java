@@ -1,10 +1,10 @@
 package kino.controller;
 
 import kino.service.AdminService;
-import kino.model.Film; // Import av Film-modellobjektet.
-import kino.model.Showing; // Import av Showing-modellobjektet.
-import java.time.LocalDate; // Import for datoobjekter.
-import java.time.LocalTime; // Import for tidsobjekter.
+import kino.model.Film;
+import kino.model.Showing;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 // AdminController-klassen fungerer som et mellomlag mellom visningslaget (View) og servicelaget (Service).
 // Den mottar forespørsler fra brukergrensesnittet og delegerer dem til AdminService.
