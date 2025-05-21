@@ -4,6 +4,11 @@ import kino.model.*;
 
 import java.util.*;
 
+/**
+ * KundeView håndterer brukergrensesnittet for kunder.
+ * Den viser tilgjengelige visninger og plasser, og lar brukeren gjøre valg.
+ */
+
 public class KundeView {
 
     private final Scanner scanner = new Scanner(System.in);
@@ -14,7 +19,7 @@ public class KundeView {
             System.out.println("⚠️  Ingen tilgjengelige visninger.");
             return null;
         }
-
+// Vis liste over visninger med filmnavn, dato, klokkeslett, pris og antall ledige plasser
         System.out.println("\n=== Kommende visninger ===");
         for (int i = 0; i < visninger.size(); i++) {
             Visning v = visninger.get(i).getVisning();
@@ -23,7 +28,7 @@ public class KundeView {
             System.out.printf("[%d] %s – %s kl %s | %.0f kr | %d ledige plasser\n",
                     i + 1, filmnavn, v.getDato(), v.getStarttid(), v.getPris(), ledige);
         }
-
+// Bruker velger visning
         System.out.print("Velg visning: ");
         int valg = scanner.nextInt() - 1;
 
@@ -43,13 +48,13 @@ public class KundeView {
             System.out.println("⚠️  Ingen ledige plasser for valgt visning.");
             return valgte;
         }
-
+//Vis alle tilgjengelige plasser med rad- og setenummer
         System.out.println("\n=== Tilgjengelige plasser ===");
         for (int i = 0; i < ledige.size(); i++) {
             Plass p = ledige.get(i);
             System.out.printf("[%d] Rad %d Sete %d\n", i + 1, p.getRadnr(), p.getSetenr());
         }
-
+//velge plasser
         System.out.print("Velg seter (kommaseparert): ");
         scanner.nextLine(); // flush
         String input = scanner.nextLine();
@@ -67,7 +72,7 @@ public class KundeView {
 
         return valgte;
     }
-
+//Henter brukerens bekreftelsesvalg etter visning og plassvalg
     public int hentBrukerValg() {
         System.out.print("Skriv 1 for å bekrefte, 2 for å avbryte: ");
         return scanner.nextInt();
