@@ -13,10 +13,14 @@ import kino.model.Login;
 
 import java.util.Scanner;
 
+/**
+ * MainProgramView fungerer som hovedmenyen for hele kinoapplikasjonen.
+ * Den håndterer navigasjon til forskjellige roller: kunde, kinobetjent, planlegger og administrator.
+ */
 public class MainProgramView {
 
     private final Scanner scanner = new Scanner(System.in);
-
+//Starter hovedmenyen og håndterer brukerens rollevalg.
     public void start() {
         while (true) {
             System.out.println("\n=== Hovedmeny ===");
@@ -42,13 +46,14 @@ public class MainProgramView {
             }
         }
     }
-
+//Starter kundemodulen
     private void kundeMeny() {
         System.out.println("Starter kundemodul...\n");
         KundeController kundeController = new KundeController();
         kundeController.start();  // Kjør kundeflyt
     }
-
+//Håndterer innlogging og oppstart av kinobetjentmodulen.
+//Kun brukere med rolle "betjent" eller "admin" har tilgang.
     private void betjentMeny() {
         System.out.println("Logg inn som kinobetjent eller administrator:");
 
@@ -92,6 +97,9 @@ public class MainProgramView {
     }
 
 
+     //Håndterer innlogging og tilgang til planleggermodulen.
+     //Kun brukere med rolle "planlegger" eller "admin" har tilgang.
+
 
     private void planleggerMeny() {
         System.out.println("Logg inn som administrator eller planlegger for å få tilgang til planleggermodulen:");
@@ -129,7 +137,8 @@ public class MainProgramView {
         adminView.start();
     }
 
-
+    //Håndterer innlogging og tilgang til systemadministrasjon.
+      //Kun brukere med rollen "admin" har tilgang.
 
     private void systemadministrasjon() {
         System.out.println("Logg inn som administrator:");
