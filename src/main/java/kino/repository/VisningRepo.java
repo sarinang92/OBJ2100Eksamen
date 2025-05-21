@@ -12,7 +12,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 public class VisningRepo {
-
+    // Singleton-instans for databasekobling
     KinoDatabaseKobling kinoDB = KinoDatabaseKobling.getInstance();
 
     // Opprett en ny visning
@@ -107,6 +107,7 @@ public class VisningRepo {
         }
     }
 
+    //Henter alle visninger
     public List<Visning> hentAlleVisninger() {
         List<Visning> visninger = new ArrayList<>();
         String sql = "SELECT * FROM kino.tblvisning";
@@ -132,7 +133,7 @@ public class VisningRepo {
 
         return visninger;
     }
-
+// Henter en liste over alle ledige plasser til en bestemt visning.
     public List<Plass> hentLedigePlasser(int visningsnr, int kinosalnr) {
         List<Plass> plasser = new ArrayList<>();
         String sql = """
@@ -172,6 +173,7 @@ public class VisningRepo {
         return plasser;
     }
 
+    //Teller hvor mange plasser som er ledige for en spesifikk visning.
     public int tellLedigePlasser(int visningsnr, int kinosalnr) {
         String sql = """
         SELECT COUNT(*) FROM kino.tblplass p
