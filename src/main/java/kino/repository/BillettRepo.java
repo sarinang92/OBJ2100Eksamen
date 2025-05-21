@@ -6,7 +6,7 @@ import kino.model.Billett;
 import java.sql.*;
 
 public class BillettRepo {
-
+    // Henter singleton-instans av databasekoblingen
     KinoDatabaseKobling kinoDB = KinoDatabaseKobling.getInstance();
 
     // Opprett en ny billett
@@ -16,6 +16,7 @@ public class BillettRepo {
         try (Connection forbindelse = kinoDB.getForbindelse();
              PreparedStatement stmt = forbindelse.prepareStatement(sql)) {
 
+            // Sett verdier i SQL-setningen
             stmt.setString(1, billett.getBillettkode());
             stmt.setInt(2, billett.getVisningsnr());
             stmt.setBoolean(3, billett.isErBetalt());
@@ -92,3 +93,4 @@ public class BillettRepo {
         }
     }
 }
+
