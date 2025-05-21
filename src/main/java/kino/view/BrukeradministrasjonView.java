@@ -4,6 +4,10 @@ import kino.controller.BrukeradministrasjonController;
 
 import java.util.Scanner;
 
+/**
+ * BrukeradministrasjonView håndterer visning og interaksjon med brukeren
+ * for operasjoner relatert til PIN-koder: opprette, endre og slette.
+ */
 public class BrukeradministrasjonView {
 
     private final BrukeradministrasjonController controller = new BrukeradministrasjonController();
