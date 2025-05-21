@@ -39,6 +39,7 @@
 ---
 
 ## Oppgave 3 - Kunde (Kinopublikum) - Amanial
+## Sarina Ser på
 - Mappen kunde_bestilling i onedrive til Sarina inneholder visst arbeidet, som må bli sett på
 - Bør sjekke om dette systemet fungerer og er koblet til databasen korrekt
 
