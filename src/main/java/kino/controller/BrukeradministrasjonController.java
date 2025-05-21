@@ -4,6 +4,7 @@ import kino.service.BrukeradministrasjonService;
 
 public class BrukeradministrasjonController {
 
+    //Opprette et BrukeradministrasjonService-objekt
     private final BrukeradministrasjonService service = new BrukeradministrasjonService();
 
     public boolean opprettPin(String brukernavn, String pin) {
