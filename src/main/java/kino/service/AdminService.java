@@ -17,6 +17,7 @@ public class AdminService {
     private ShowingDAO showingDAO;
     private CinemaHallDAO cinemaHallDAO;
 
+    //Konstruktør
     public AdminService() {
         try {
             Connection conn = KinoDatabaseKobling.getInstance().getForbindelse();
@@ -28,10 +29,12 @@ public class AdminService {
         }
     }
 
+    //Legger til en ny film med gitt navn
     public void addFilm(String filmName) {
         filmDAO.createFilm(filmName);
     }
 
+    //Oppdaterer tittelen på en film
     public void updateFilm(int filmId, String newTitle) {
         Film film = filmDAO.hentFilm(filmId);
         if (film != null) {
@@ -39,11 +42,11 @@ public class AdminService {
             filmDAO.oppdaterFilm(film);
         }
     }
-
+//Planlegger en ny visning.
     public void scheduleShowing(Showing showing) {
         showingDAO.createShowing(showing);
     }
-
+//Oppdaterer en eksisterende visning
     public void updateShowing(int showingId, int filmId, int cinemaHallId, java.time.LocalDate date, java.time.LocalTime startTime, double price) {
         Showing showing = showingDAO.getShowing(showingId);
         if (showing != null) {
@@ -55,23 +58,23 @@ public class AdminService {
             showingDAO.updateShowing(showing);
         }
     }
-
+//Legger til en ny kinosa
     public void addCinemaHall(CinemaHall cinemaHall) {
         cinemaHallDAO.createCinemaHall(cinemaHall);
     }
-
+// Sletter en film
     public void deleteFilm(int filmId) {
         filmDAO.slettFilm(filmId);
     }
-
+//Sletter en visning
     public void deleteShowing(int showingId) {
         showingDAO.deleteShowing(showingId);
     }
-
+//Henter alle filmer
     public List<Film> getAllFilms() {
         return filmDAO.hentAlleFilmer();
     }
-
+//Henter alle visninger knyttet til en bestemt film
     public List<Showing> getShowingsForFilm(int filmId) {
         return showingDAO.getShowingsForFilm(filmId);
     }
