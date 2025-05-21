@@ -49,24 +49,47 @@ public class MainProgramView {
     }
 
     private void betjentMeny() {
-        System.out.println("Starter kinobetjentmodul...");
+        System.out.println("Logg inn som kinobetjent eller administrator:");
+
+        System.out.print("Brukernavn: ");
+        String brukernavn = scanner.nextLine();
+
+        System.out.print("PIN-kode: ");
+        String pinkode = scanner.nextLine();
+
+        LoginRepo repo = new LoginRepo();
+        Login login = repo.finnEnLogin(brukernavn);
+
+        if (login == null) {
+            System.out.println("Bruker ikke funnet.");
+            return;
+        }
+
+        String rolle = login.getRole().toLowerCase();
+        if (!rolle.equals("betjent") && !rolle.equals("admin")) {
+            System.out.println("Tilgang nektet. Kun betjent eller admin har tilgang.");
+            return;
+        }
+
+        boolean ok = repo.verifiserPinkode(brukernavn, pinkode);
+        if (!ok) {
+            System.out.println("Feil PIN-kode. Tilgang nektet.");
+            return;
+        }
+
+        System.out.println("Innlogging godkjent. Velkommen, " + rolle + ".");
 
         try {
-            // 1. Lag databaseforbindelse via din koblingsklasse
-            Connection conn = kino.config.KinoDatabaseKobling.getInstance().getForbindelse();
-
-            // 2. Opprett DAO, Controller og View
-            kino.dao.BillettDAO billettDAO = new kino.dao.BillettDAO(conn);
-            kino.controller.KinobetjentController controller = new kino.controller.KinobetjentController(billettDAO);
-            kino.view.KinobetjentView kinobetjentView = new kino.view.KinobetjentView(controller);
-
-            // 3. Kjør menyen
+            Connection conn = KinoDatabaseKobling.getInstance().getForbindelse();
+            BillettDAO billettDAO = new BillettDAO(conn);
+            KinobetjentController controller = new KinobetjentController(billettDAO);
+            KinobetjentView kinobetjentView = new KinobetjentView(controller);
             kinobetjentView.visMeny();
-
         } catch (Exception e) {
             System.out.println("Feil ved oppstart av kinobetjentmodulen: " + e.getMessage());
         }
     }
+
 
 
     private void planleggerMeny() {
