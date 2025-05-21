@@ -50,6 +50,7 @@
 ---
 
 ## Prosjektrapport (PDF)
+https://uisn-my.sharepoint.com/:f:/r/personal/266069_usn_no/Documents/OBJ2100%20Eksamen?csf=1&web=1&e=8Sl2KK
 - Kort beskrivelse av hva hver person har gjort
 - Teknologivalg og utfordringer
 - Dokumentasjon av datasikkerhet og personvern (ca. ½–1 side)
