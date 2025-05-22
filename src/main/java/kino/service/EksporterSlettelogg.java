@@ -1,3 +1,5 @@
+// Eksport av slettelogger for kino-applikasjonen (Maksim)
+// Funksjon: Eksporterer slettinger til fil og henter antall ubetalte billetter fra databasen
 package kino.service;
 
 // Importer nødvendige biblioteker for filbehandling og databaseoperasjoner

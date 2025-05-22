@@ -1,15 +1,15 @@
-// OBS: Kun for testing av systemvedlikehold funksjonene
+// OBS: Kun for testing av systemvedlikehold funksjonene (Maksim)
 
 package kino;
 
 import kino.config.KinoDatabaseKobling;
-import kino.service.EksporterSlettelogg;
+// import kino.service.EksporterSlettelogg;
 
 // Import DatabaseBackupService hvis det finnes i kino.service-pakken
-import kino.service.DatabaseBackupService;
+// import kino.service.DatabaseBackupService;
 
 // Import RyddMidlertidigeData hvis det finnes i kino.service-pakken
-import kino.service.RyddMidlertidigeData;
+// import kino.service.RyddMidlertidigeData;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -30,16 +30,16 @@ public class TestDB {
         }
 
         // Test eksport av sletteloggen (kopierer slettinger.dat til backup-mappe)
-        EksporterSlettelogg vedlikehold = new EksporterSlettelogg();
-        vedlikehold.eksporterLogg("systemvedlikehold_ressurser/exported_logs/slettinger_backup.dat");
-        vedlikehold.hentAntallAktiveBestillinger();
+        // EksporterSlettelogg vedlikehold = new EksporterSlettelogg();
+        // vedlikehold.eksporterLogg("systemvedlikehold_ressurser/exported_logs/slettinger_backup.dat");
+        // vedlikehold.hentAntallAktiveBestillinger();
 
         // Test sikkerhetskopi av databasen (bruker pg_dump)
-        DatabaseBackupService backupService = new DatabaseBackupService();
-        backupService.backupDatabase("kino_backup.dump");
+        // DatabaseBackupService backupService = new DatabaseBackupService();
+        // backupService.backupDatabase("kino_backup.dump");
 
         // Test sletting av ubetalte billetter fra databasen
-        RyddMidlertidigeData rydder = new RyddMidlertidigeData();
-        rydder.slettUbetalteBilletter();
+        // RyddMidlertidigeData rydder = new RyddMidlertidigeData(); 
+        // rydder.slettUbetalteBilletter();
     }
 }
