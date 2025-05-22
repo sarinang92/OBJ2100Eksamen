@@ -1,4 +1,4 @@
-// OBS: Kun for testing av systemvedlikehold funksjonene (Maksim)
+// OBS: Kun for testing av systemvedlikehold funksjonene
 
 package kino;
 

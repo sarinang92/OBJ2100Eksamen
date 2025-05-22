@@ -1,4 +1,4 @@
-// Sikkerhetskopiering funksjonen for kino-databasen (Maksim) 
+// Sikkerhetskopiering funksjonen for kino-databasen
 package kino.service;
 
 // Importer nødvendige biblioteker og klasser for filbehandling og prosesshåndtering
